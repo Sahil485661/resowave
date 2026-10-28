@@ -1,0 +1,20 @@
+# Build outputs & Dependencies
+node_modules/
+dist/
+dist-ssr/
+*.local
+scripts/
+make_favicons.py
+make_og_preview.py
+# Environment files
+.env
+.env.*
+Backend/.env
+backend/.env
+ImageKit SDK Setup.txt
+.agents/
+skills-lock.json
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

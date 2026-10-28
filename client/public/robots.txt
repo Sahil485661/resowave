@@ -1,0 +1,14 @@
+# ResoWave Robots Configuration
+# https://resowave.app
+
+User-agent: *
+Allow: /
+Allow: /search
+Disallow: /api/
+Disallow: /studio/
+Disallow: /studio/upload
+Disallow: /profile
+Disallow: /liked
+
+# Sitemap index
+Sitemap: https://resowave.app/sitemap.xml
