@@ -5,7 +5,7 @@ import { TrackCard } from '@/components/music/TrackCard';
 import { TrackCardSkeleton } from '@/components/music/TrackCardSkeleton';
 import { Music2 } from 'lucide-react';
 
-export function Home({ onUploadRequest, onNewTrackRef, onAddToPlaylist }) {
+export function Home({ user = null, onUploadRequest, onLoginClick, onNewTrackRef, onAddToPlaylist }) {
   const { currentTrack, isPlaying, playPlaylist, playTrack, togglePlay } = useAudio();
   const [tracks, setTracks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -82,18 +82,47 @@ export function Home({ onUploadRequest, onNewTrackRef, onAddToPlaylist }) {
             ))}
           </div>
         ) : tracks.length === 0 ? (
-          <div className="flex flex-col items-center justify-center rounded-xl bg-spotify-surface/40 py-16 text-center border border-white/5">
+          <div className="flex flex-col items-center justify-center rounded-xl bg-spotify-surface/40 py-16 text-center border border-white/5 px-4">
             <Music2 className="h-12 w-12 text-spotify-muted" />
             <h3 className="mt-3 text-base font-bold text-white">No tracks available yet</h3>
-            <p className="mt-1 text-xs text-spotify-subtext">Be the first artist to publish a track!</p>
-            {onUploadRequest && (
-              <button
-                type="button"
-                onClick={onUploadRequest}
-                className="mt-4 rounded-full bg-spotify-green px-6 py-2 text-xs font-bold text-black hover:scale-105 transition-transform"
-              >
-                Upload Track
-              </button>
+
+            {user?.role === 'artist' ? (
+              <>
+                <p className="mt-1 text-xs text-spotify-subtext">Be the first artist to publish a track!</p>
+                {onUploadRequest && (
+                  <button
+                    type="button"
+                    onClick={onUploadRequest}
+                    className="mt-4 rounded-full bg-spotify-green px-6 py-2.5 text-xs font-bold text-black hover:scale-105 transition-transform shadow-lg shadow-spotify-green/20 cursor-pointer"
+                  >
+                    Upload Track
+                  </button>
+                )}
+              </>
+            ) : user ? (
+              <p className="mt-1 text-xs text-spotify-subtext">Check back soon for new releases from artists!</p>
+            ) : (
+              <>
+                <p className="mt-1 text-xs text-spotify-subtext max-w-sm">
+                  Sign in or create an account to start streaming and discovering new music.
+                </p>
+                <div className="mt-4 flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => onLoginClick?.('login')}
+                    className="rounded-full bg-spotify-green px-5 py-2 text-xs font-bold text-black hover:scale-105 transition-transform cursor-pointer"
+                  >
+                    Log In
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => onLoginClick?.('register')}
+                    className="rounded-full border border-white/20 bg-transparent px-5 py-2 text-xs font-bold text-white hover:bg-white/10 transition-colors cursor-pointer"
+                  >
+                    Sign Up Free
+                  </button>
+                </div>
+              </>
             )}
           </div>
         ) : (

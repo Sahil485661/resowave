@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, lazy, Suspense } from 'react';
-import { Toaster } from 'sonner';
+import { Toaster, toast } from 'sonner';
 import { AuthProvider, useAuth } from '@/context/AuthContext';
 import { FavoritesProvider } from '@/context/FavoritesContext';
 import { PlaylistProvider } from '@/context/PlaylistContext';
@@ -83,13 +83,23 @@ function ResowaveApp() {
     setCurrentTab('home');
   };
 
+  const handleUploadClick = () => {
+    if (!user) {
+      openAuth('login');
+    } else if (user.role !== 'artist') {
+      toast.error('Only artist accounts can upload tracks');
+    } else {
+      setIsUploadOpen(true);
+    }
+  };
+
   return (
     <>
       <AppLayout
         currentTab={currentTab}
         onSelectTab={setCurrentTab}
         user={user}
-        onUploadClick={() => setIsUploadOpen(true)}
+        onUploadClick={handleUploadClick}
         onLoginClick={(mode = 'login') => openAuth(mode)}
         onLogout={handleLogout}
         onCreatePlaylistClick={() => {
@@ -100,13 +110,15 @@ function ResowaveApp() {
         <Suspense fallback={<RouteLoadingSkeleton />}>
           {currentTab === 'home' && (
             <Home
-              onUploadRequest={() => setIsUploadOpen(true)}
+              user={user}
+              onUploadRequest={user?.role === 'artist' ? handleUploadClick : null}
+              onLoginClick={(mode = 'login') => openAuth(mode)}
               onNewTrackRef={newTrackHandlerRef}
               onAddToPlaylist={(t) => setAddToPlaylistTrack(t)}
             />
           )}
           {currentTab === 'search' && <Search />}
-          {currentTab === 'studio' && <ArtistStudio onUploadClick={() => setIsUploadOpen(true)} />}
+          {currentTab === 'studio' && <ArtistStudio onUploadClick={handleUploadClick} />}
           {currentTab === 'liked' && (
             <LikedSongs onLoginClick={(mode = 'login') => openAuth(mode)} />
           )}

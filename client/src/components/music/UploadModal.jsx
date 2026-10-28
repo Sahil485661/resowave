@@ -5,14 +5,48 @@ import { Input } from '@/components/ui/Input';
 import { Progress } from '@/components/ui/Progress';
 import { AudioDropzone } from './AudioDropzone';
 import { uploadMusic } from '@/api/music.api';
+import { useAuth } from '@/context/AuthContext';
 
 export function UploadModal({ isOpen, onClose, onSuccess }) {
+  const { user } = useAuth();
   const [title, setTitle] = useState('');
   const [file, setFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
 
   if (!isOpen) return null;
+
+  if (!user || user.role !== 'artist') {
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div className="relative w-full max-w-sm rounded-2xl border border-white/10 bg-spotify-surface p-6 shadow-2xl text-center">
+          <button
+            type="button"
+            onClick={onClose}
+            className="absolute right-4 top-4 rounded-full p-1 text-spotify-subtext hover:bg-white/10 hover:text-white transition-colors"
+          >
+            <X className="h-5 w-5" />
+          </button>
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-white/5 border border-white/10 mb-4">
+            <Disc className="h-8 w-8 text-spotify-green animate-spin-slow" />
+          </div>
+          <h3 className="text-lg font-bold text-white">Artist Account Required</h3>
+          <p className="mt-2 text-xs text-spotify-subtext leading-relaxed">
+            {!user
+              ? 'Please log in to an artist account to upload audio tracks to the cloud library.'
+              : `Your current account role is "${user.role}". Only verified artists can publish new tracks.`}
+          </p>
+          <button
+            type="button"
+            onClick={onClose}
+            className="mt-5 w-full rounded-full bg-spotify-green py-2.5 text-xs font-bold text-black hover:scale-105 active:scale-95 transition-all"
+          >
+            Got it
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   const handleReset = () => {
     setTitle('');
