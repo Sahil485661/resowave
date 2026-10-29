@@ -21,7 +21,7 @@
 </p>
 
 <p align="center">
-  <strong>Demo Link:</strong> <a href="https://resowave-demo.vercel.app">https://resowave-demo.vercel.app</a><br />
+  <strong>Demo Link:</strong> <a href="https://resowave-one.vercel.app">https://resowave-demo.vercel.app</a><br />
   <strong>API Base URL:</strong> <code>https://api.resowave.app</code><br />
   <strong>UI Screen Mockup / GIF:</strong> <a href="https://placehold.co/1400x800/121212/1DB954?text=ResoWave+UI+Preview">Preview</a>
 </p>
