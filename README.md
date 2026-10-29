@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://resowave-demo.vercel.app"><img src="https://img.shields.io/badge/Demo-Live%20Preview-1DB954?style=for-the-badge&logo=vercel" alt="Demo" /></a>
+  <a href="https://resowave-one.vercel.app"><img src="https://img.shields.io/badge/Demo-Live%20Preview-1DB954?style=for-the-badge&logo=vercel" alt="Demo" /></a>
   <img src="https://img.shields.io/badge/React-18.x-61DAFB?style=for-the-badge&logo=react" alt="React" />
   <img src="https://img.shields.io/badge/Vite-6.x-646CFF?style=for-the-badge&logo=vite" alt="Vite" />
   <img src="https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=node.js" alt="Node.js" />
@@ -21,7 +21,7 @@
 </p>
 
 <p align="center">
-  <strong>Demo Link:</strong> <a href="https://resowave-one.vercel.app">https://resowave-demo.vercel.app</a><br />
+  <strong>Demo Link:</strong> <a href="https://resowave-one.vercel.app">https://resowave-one.vercel.app</a><br />
   <strong>API Base URL:</strong> <code>https://api.resowave.app</code><br />
   <strong>UI Screen Mockup / GIF:</strong> <a href="https://placehold.co/1400x800/121212/1DB954?text=ResoWave+UI+Preview">Preview</a>
 </p>
